@@ -9,6 +9,8 @@ export default function Categories() {
   const [totalPages, setTotalPages] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
@@ -36,7 +38,7 @@ export default function Categories() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:4000/categories?page=${currentPage}`,
+        `${BACKEND_URL}/categories?page=${currentPage}`,
         {
           headers: {
             Authorization: `${token}`,
@@ -56,7 +58,7 @@ export default function Categories() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://localhost:4000/toggle-interest`,
+        `${BACKEND_URL}/toggle-interest`,
         { categoryId },
         {
           headers: {

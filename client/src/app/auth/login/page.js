@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-require("dotenv").config();
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,10 +10,12 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:4000/login`, {
+      const response = await axios.post(`${BACKEND_URL}/login`, {
         email,
         password,
       });

@@ -9,6 +9,8 @@ export default function Verify() {
   const [code, setCode] = useState("");
   const search = searchParams.get("email");
   const [email, setEmail] = useState(search);
+  
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const maskEmail = (email) => {
     if (!email) return ""; // Handle empty email case
@@ -25,7 +27,7 @@ export default function Verify() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:4000/verify`, {
+      const response = await axios.post(`${BACKEND_URL}/verify`, {
         email,
         code,
       });
